@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Bienvenido a TeLlevoApp</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <ion-img class="logo" src="assets/imagenes/Logo-Duoc-UC.png"></ion-img>
+
+    <!-- Correo en lugar de RUT -->
+    <ion-item>
+      <ion-label position="floating">Correo Electrónico</ion-label>
+      <ion-input [(ngModel)]="formLogin.correo" type="email"></ion-input>
+    </ion-item>
+
+    <!-- Contraseña -->
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [(ngModel)]="formLogin.password" type="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="iniciarSesion()">Iniciar sesión</ion-button>
+    <ion-button expand="block" fill="outline" (click)="navegarRegistro()">Crear cuenta</ion-button>
+
+    <div class="forgot-password">
+      <a [routerLink]="['/recuperar-clave']">¿Olvidaste tu contraseña?</a>
+    </div>
+  </div>
+
+  <ion-loading [isOpen]="loading" message="Cargando..." duration="1500"></ion-loading>
+</ion-content>

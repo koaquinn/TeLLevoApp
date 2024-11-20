@@ -1,0 +1,67 @@
+// login.page.scss
+
+// Variables
+$primary-color: #1a73e8;
+$background-color: #f8f9fa;
+$white: #ffffff;
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+// Estilos globales
+:host {
+  ion-content {
+    --background: #{$background-color};
+  }
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+  margin: 40px auto;
+  display: block;
+}
+ion-title {
+  text-align: center;
+  padding: 25px 30px 25px 30px;
+}
+ion-item {
+  --background: #{$white};
+  --border-radius: 8px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px $shadow-color;
+
+  ion-input {
+    --padding-start: 8px;
+  }
+}
+
+ion-button {
+  --border-radius: 8px;
+  margin-top: 24px;
+  height: 48px;
+  font-size: 16px;
+  text-transform: none;
+
+  &.button-outline {
+    --border-color: #{$primary-color};
+    --color: #{$primary-color};
+  }
+}
+
+.forgot-password {
+  margin-top: 24px;
+  text-align: center;
+
+  a {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: 500;
+  }
+}

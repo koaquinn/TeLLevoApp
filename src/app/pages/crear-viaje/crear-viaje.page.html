@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear Viaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="ofrecerViaje()" class="viaje-form">
+    <!-- Datos del conductor -->
+    <ion-item class="conductor-item">
+      <ion-label position="stacked">Nombre del Conductor</ion-label>
+      <ion-input 
+        class="nombre-conductor"
+        [value]="viajeData.nombreConductor + ' ' + viajeData.apellidoConductor"
+        disabled>
+      </ion-input>
+    </ion-item>
+
+    <!-- Datos del viaje -->
+    <ion-item>
+      <ion-label position="stacked">Destino</ion-label>
+      <ion-input 
+        type="text"
+        [(ngModel)]="viajeData.destino" 
+        name="destino" 
+        required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Fecha</ion-label>
+      <ion-input 
+        type="date" 
+        [(ngModel)]="viajeData.fecha" 
+        name="fecha" 
+        [min]="fechaMinima"
+        required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Hora</ion-label>
+      <ion-input 
+        type="time" 
+        [(ngModel)]="viajeData.hora" 
+        name="hora" 
+        required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Asientos Disponibles</ion-label>
+      <ion-input 
+        type="number" 
+        [(ngModel)]="viajeData.asientosDisponibles" 
+        name="asientosDisponibles" 
+        min="1" 
+        max="4"
+        required>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Precio por persona</ion-label>
+      <ion-input 
+        type="number" 
+        [(ngModel)]="viajeData.precio" 
+        name="precio" 
+        min="0"
+        required>
+      </ion-input>
+    </ion-item>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" onsubmit="ofrecerViaje()">Ofrecer Viaje</ion-button>
+    </div>
+  </form>
+</ion-content>

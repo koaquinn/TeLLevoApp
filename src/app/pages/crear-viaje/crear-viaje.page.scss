@@ -1,0 +1,63 @@
+ion-content {
+    --background: rgba(0, 0, 0, 0.15); // Versión más limpia del fondo translúcido
+    --ion-text-color: #000000; // Color de texto base
+    
+    form {
+      background: white;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: relative; // Para asegurar el correcto posicionamiento
+      z-index: 1; // Asegura que el formulario esté por encima del fondo
+      
+      ion-item {
+        --padding-start: 0;
+        --border-color: #dddddd;
+        --color: #222222;
+        --background: transparent;
+        margin-bottom: 16px;
+        
+        &::part(native) {
+          background: transparent;
+        }
+        
+        ion-label {
+          --color: #222222;
+          font-weight: 500;
+        }
+        
+        ion-input {
+          --color: #000000;
+          margin-top: 8px;
+          
+          &::part(native) {
+            color: #000000;
+          }
+        }
+        
+        &.item-has-focus {
+          --highlight-background: #000000;
+        }
+      }
+      
+      ion-button {
+        margin-top: 16px;
+        --border-radius: 8px;
+        height: 48px;
+        --background: #000000;
+        --color: #ffffff;
+      }
+    }
+        
+    .nombre-conductor {
+      color: #000000 !important;
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin: 16px;
+      display: block;
+      text-align: left;
+      z-index: 2;
+      position: relative;
+    }
+  }
