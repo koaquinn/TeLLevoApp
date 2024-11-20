@@ -1,92 +1,95 @@
 <ion-header translucent>
-  <ion-toolbar>
+  <ion-toolbar style="--background: #002E66;">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="/" style="color: white;"></ion-back-button>
     </ion-buttons>
-    <ion-title>Registro</ion-title>
+    <ion-title style="color: white;">Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="logo-container">
-    <ion-img class="logo" src="assets/imagenes/Logo-Duoc-UC.png"></ion-img>
+  <div class="register-container">
+    <div class="logo-container">
+      <ion-img class="logo" src="assets/imagenes/Logo-Duoc-UC.png" alt="Logo DUOC UC"></ion-img>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <!-- Nombre -->
+      <ion-item lines="full">
+        <ion-label position="floating" color="primary">Nombre</ion-label>
+        <ion-input type="text" formControlName="nombre" class="custom-input"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched">
+        <ion-text color="danger" *ngIf="registerForm.get('nombre')?.errors?.['required']">
+          El nombre es requerido.
+        </ion-text>
+        <ion-text color="danger" *ngIf="registerForm.get('nombre')?.errors?.['minlength']">
+          El nombre debe tener al menos 2 caracteres.
+        </ion-text>
+      </div>
+
+      <!-- Apellido -->
+      <ion-item lines="full">
+        <ion-label position="floating" color="primary">Apellido</ion-label>
+        <ion-input type="text" formControlName="apellido" class="custom-input"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched">
+        <ion-text color="danger" *ngIf="registerForm.get('apellido')?.errors?.['required']">El apellido es requerido.</ion-text>
+        <ion-text color="danger" *ngIf="registerForm.get('apellido')?.errors?.['minlength']">El apellido debe tener al menos 2 caracteres.</ion-text>
+      </div>
+
+      <!-- RUT -->
+      <ion-item lines="full">
+        <ion-label position="floating" color="primary">RUT</ion-label>
+        <ion-input type="text" formControlName="rut" class="custom-input"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="registerForm.get('rut')?.invalid && registerForm.get('rut')?.touched">
+        <ion-text color="danger" *ngIf="registerForm.get('rut')?.errors?.['required']">El RUT es requerido.</ion-text>
+        <ion-text color="danger" *ngIf="registerForm.get('rut')?.errors?.['invalidRut']">El RUT no es válido.</ion-text>
+      </div>
+
+      <!-- Correo -->
+      <ion-item lines="full">
+        <ion-label position="floating" color="primary">Correo institucional</ion-label>
+        <ion-input type="email" formControlName="correo" class="custom-input"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="registerForm.get('correo')?.invalid && registerForm.get('correo')?.touched">
+        <ion-text color="danger" *ngIf="registerForm.get('correo')?.errors?.['required']">El correo es requerido.</ion-text>
+        <ion-text color="danger" *ngIf="registerForm.get('correo')?.errors?.['email']">El correo no es válido.</ion-text>
+      </div>
+
+      <!-- Contraseña -->
+      <ion-item lines="full">
+        <ion-label position="floating" color="primary">Contraseña</ion-label>
+        <ion-input type="password" formControlName="password" class="custom-input"></ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+        <ion-text color="danger" *ngIf="registerForm.get('password')?.errors?.['required']">La contraseña es requerida.</ion-text>
+        <ion-text color="danger" *ngIf="registerForm.get('password')?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres.</ion-text>
+      </div>
+
+      <!-- Carrera -->
+      <ion-item lines="full">
+        <ion-label position="floating" color="primary">Carrera</ion-label>
+        <ion-select formControlName="carrera" interface="action-sheet" class="custom-select">
+          <ion-select-option value="informatica">Tec. Analista Programador</ion-select-option>
+          <ion-select-option value="adm_empresas">Tec. Administración de empresas</ion-select-option>
+          <ion-select-option value="logistica">Tec. en Logística</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div class="error-message" *ngIf="registerForm.get('carrera')?.invalid && registerForm.get('carrera')?.touched">
+        <ion-text color="danger" *ngIf="registerForm.get('carrera')?.errors?.['required']">La carrera es requerida.</ion-text>
+      </div>
+
+      <!-- Botón de registro -->
+      <div class="ion-padding">
+        <ion-button type="submit" expand="block" [disabled]="registerForm.invalid" style="--background: #002E66;">
+          Registrarse
+        </ion-button>
+      </div>
+    </form>
   </div>
 
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
-    <!-- Nombre -->
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input type="text" formControlName="nombre"></ion-input>
-    </ion-item>
-    <div *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched">
-      <ion-text color="danger" *ngIf="registerForm.get('nombre')?.errors?.['required']">
-        El nombre es requerido.
-      </ion-text>
-      <ion-text color="danger" *ngIf="registerForm.get('nombre')?.errors?.['minlength']">
-        El nombre debe tener al menos 2 caracteres.
-      </ion-text>
-    </div> <!-- Closing div for nombre errors -->
-
-    <!-- Apellido -->
-    <ion-item>
-      <ion-label position="floating">Apellido</ion-label>
-      <ion-input type="text" formControlName="apellido"></ion-input>
-    </ion-item>
-    <div *ngIf="registerForm.get('apellido')?.invalid && registerForm.get('apellido')?.touched">
-      <ion-text color="danger" *ngIf="registerForm.get('apellido')?.errors?.['required']">El apellido es requerido.</ion-text>
-      <ion-text color="danger" *ngIf="registerForm.get('apellido')?.errors?.['minlength']">El apellido debe tener al menos 2 caracteres.</ion-text>
-    </div>
-
-    <!-- RUT -->
-    <ion-item>
-      <ion-label position="floating">RUT</ion-label>
-      <ion-input type="text" formControlName="rut"></ion-input>
-    </ion-item>
-    <div *ngIf="registerForm.get('rut')?.invalid && registerForm.get('rut')?.touched">
-      <ion-text color="danger" *ngIf="registerForm.get('rut')?.errors?.['required']">El RUT es requerido.</ion-text>
-      <ion-text color="danger" *ngIf="registerForm.get('rut')?.errors?.['invalidRut']">El RUT no es válido.</ion-text>
-    </div>
-
-    <!-- Correo -->
-    <ion-item>
-      <ion-label position="floating">Correo institucional</ion-label>
-      <ion-input type="email" formControlName="correo"></ion-input>
-    </ion-item>
-    <div *ngIf="registerForm.get('correo')?.invalid && registerForm.get('correo')?.touched">
-      <ion-text color="danger" *ngIf="registerForm.get('correo')?.errors?.['required']">El correo es requerido.</ion-text>
-      <ion-text color="danger" *ngIf="registerForm.get('correo')?.errors?.['email']">El correo no es válido.</ion-text>
-    </div>
-
-    <!-- Contraseña -->
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
-    </ion-item>
-    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-      <ion-text color="danger" *ngIf="registerForm.get('password')?.errors?.['required']">La contraseña es requerida.</ion-text>
-      <ion-text color="danger" *ngIf="registerForm.get('password')?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres.</ion-text>
-    </div>
-
-    <!-- Carrera -->
-    <ion-item>
-      <ion-label position="floating">Carrera</ion-label>
-      <ion-select formControlName="carrera">
-        <ion-select-option value="informatica">Tec. Analista Programador</ion-select-option>
-        <ion-select-option value="adm_empresas">Tec. Administracion de empresas</ion-select-option>
-        <ion-select-option value="logistica">Tec. en Logistica</ion-select-option>
-        <!-- Agrega más opciones según las carreras disponibles -->
-      </ion-select>
-    </ion-item>
-    <div *ngIf="registerForm.get('carrera')?.invalid && registerForm.get('carrera')?.touched">
-      <ion-text color="danger" *ngIf="registerForm.get('carrera')?.errors?.['required']">La carrera es requerida.</ion-text>
-    </div>
-
-    <!-- Botón de registro -->
-    <ion-button type="submit" expand="block" [disabled]="registerForm.invalid">
-      Registrarse
-    </ion-button>
-
-    <!-- Loading Spinner -->
-    <ion-loading [isOpen]="loading" message="Cargando..." duration="1500"></ion-loading>
-  </form>
+  <!-- Loading Spinner -->
+  <ion-loading [isOpen]="loading" message="Cargando..." duration="1500"></ion-loading>
 </ion-content>

@@ -1,66 +1,117 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar style="--background: #002E66;">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
+      <ion-back-button defaultHref="/home" style="color: white;"></ion-back-button>
     </ion-buttons>
-    <ion-title>Buscar Viaje</ion-title>
+    <ion-title style="color: white;">Buscar Viaje</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- Viaje Actual -->
-  <ion-card *ngIf="viajeActual">
-    <ion-card-header>
-      <ion-card-title>Tu Viaje Actual</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item lines="none">
-        <ion-label>
-          <h2>Destino: {{viajeActual.destino}}</h2>
-          <p>Conductor: {{viajeActual.nombreConductor}} {{viajeActual.apellidoConductor}}</p>
-          <p>Fecha: {{viajeActual.fecha}} - {{viajeActual.hora}}</p>
-          <p>Precio: ${{viajeActual.precio}}</p>
-        </ion-label>
-      </ion-item>
-      <ion-button expand="block" color="danger" (click)="cancelarViaje()">
-        Cancelar Viaje
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- Lista de Viajes Disponibles -->
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Viajes Disponibles</ion-label>
-    </ion-list-header>
-
-    <ion-card *ngFor="let viaje of viajes">
+  <div class="viajes-container">
+    <!-- Viaje Actual -->
+    <ion-card *ngIf="viajeActual" class="viaje-actual-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="car" class="header-icon"></ion-icon>
+          Tu Viaje Actual
+        </ion-card-title>
+      </ion-card-header>
       <ion-card-content>
-        <ion-item lines="none">
-          <ion-label>
-            <h2>Destino: {{viaje.destino}}</h2>
-            <p><strong>Conductor:</strong> {{viaje.nombreConductor}} {{viaje.apellidoConductor}}</p>
-            <p><strong>Fecha:</strong> {{viaje.fecha}} - {{viaje.hora}}</p>
-            <p><strong>Asientos disponibles:</strong> {{viaje.asientosDisponibles}}</p>
-            <p><strong>Precio:</strong> ${{viaje.precio}}</p>
-          </ion-label>
-        </ion-item>
-        <div class="ion-text-end">
-          <ion-button 
-            (click)="tomarViaje(viaje)" 
-            [disabled]="viajeActual !== null"
-            color="primary">
-            Tomar Viaje
-          </ion-button>
+        <div class="viaje-info">
+          <div class="info-item">
+            <ion-icon name="location"></ion-icon>
+            <span class="label">Destino:</span>
+            <span class="value">{{viajeActual.destino}}</span>
+          </div>
+          
+          <div class="info-item">
+            <ion-icon name="person"></ion-icon>
+            <span class="label">Conductor:</span>
+            <span class="value">{{viajeActual.nombreConductor}} {{viajeActual.apellidoConductor}}</span>
+          </div>
+          
+          <div class="info-item">
+            <ion-icon name="calendar"></ion-icon>
+            <span class="label">Fecha y Hora:</span>
+            <span class="value">{{viajeActual.fecha}} - {{viajeActual.hora}}</span>
+          </div>
+          
+          <div class="info-item">
+            <ion-icon name="cash"></ion-icon>
+            <span class="label">Precio:</span>
+            <span class="value">${{viajeActual.precio}}</span>
+          </div>
         </div>
+        
+        <ion-button expand="block" color="danger" (click)="cancelarViaje()" class="cancel-button">
+          <ion-icon name="close-circle" slot="start"></ion-icon>
+          Cancelar Viaje
+        </ion-button>
       </ion-card-content>
     </ion-card>
 
-    <!-- Mensaje cuando no hay viajes disponibles -->
-    <ion-item *ngIf="viajes.length === 0" lines="none">
-      <ion-label class="ion-text-center">
-        No hay viajes disponibles en este momento
-      </ion-label>
-    </ion-item>
-  </ion-list>
+    <!-- Lista de Viajes Disponibles -->
+    <div class="viajes-list-section">
+      <h2 class="section-title">
+        <ion-icon name="list"></ion-icon>
+        Viajes Disponibles
+      </h2>
+
+      <ion-card *ngFor="let viaje of viajes" class="viaje-card">
+        <ion-card-content>
+          <div class="viaje-info">
+            <div class="info-item">
+              <ion-icon name="location"></ion-icon>
+              <span class="label">Destino:</span>
+              <span class="value">{{viaje.destino}}</span>
+            </div>
+            
+            <div class="info-item">
+              <ion-icon name="person"></ion-icon>
+              <span class="label">Conductor:</span>
+              <span class="value">{{viaje.nombreConductor}} {{viaje.apellidoConductor}}</span>
+            </div>
+            
+            <div class="info-item">
+              <ion-icon name="calendar"></ion-icon>
+              <span class="label">Fecha y Hora:</span>
+              <span class="value">{{viaje.fecha}} - {{viaje.hora}}</span>
+            </div>
+            
+            <div class="info-item">
+              <ion-icon name="people"></ion-icon>
+              <span class="label">Asientos:</span>
+              <span class="value">{{viaje.asientosDisponibles}}</span>
+            </div>
+            
+            <div class="info-item">
+              <ion-icon name="cash"></ion-icon>
+              <span class="label">Precio:</span>
+              <span class="value">${{viaje.precio}}</span>
+            </div>
+          </div>
+          
+          <div class="action-button">
+            <ion-button 
+              (click)="tomarViaje(viaje)" 
+              [disabled]="viajeActual !== null"
+              style="--background: #002E66;">
+              <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+              Tomar Viaje
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Mensaje cuando no hay viajes -->
+      <ion-card *ngIf="viajes.length === 0" class="empty-state-card">
+        <ion-card-content class="empty-state">
+          <ion-icon name="car-outline" class="empty-icon"></ion-icon>
+          <h3>No hay viajes disponibles</h3>
+          <p>Vuelve a revisar más tarde</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>

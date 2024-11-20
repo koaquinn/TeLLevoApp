@@ -1,64 +1,66 @@
-:host {
-    --ion-color-primary: #1a73e8;
-    --ion-color-primary-rgb: 26,115,232;
-    --ion-color-primary-contrast: #ffffff;
-    --ion-color-primary-contrast-rgb: 255,255,255;
-    --ion-color-primary-shade: #1765cc;
-    --ion-color-primary-tint: #3180ea;
-  }
-  
-  ion-content {
-    --background: #f8f9fa;
-  }
-  
-  .logo-container {
-    display: flex;
-    justify-content: center;
-    margin: 2rem 0;
+.register-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 150px;
+  margin: 0 auto;
+}
+
+ion-item {
+  --highlight-color: #002E66;
+  --border-color: #E6E7E8;
+  margin-bottom: 8px;
+  --padding-start: 0;
+}
+
+ion-item.item-has-focus {
+  --highlight-color: #FFC700;
+}
+
+.error-message {
+  padding: 4px 16px;
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+}
+
+ion-label {
+  --color: #002E66 !important;
+}
+
+.custom-input, .custom-select {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --border-radius: 4px;
+}
+
+ion-select::part(icon) {
+  color: #002E66;
+}
+
+ion-button {
+  margin-top: 1.5rem;
+  --border-radius: 4px;
+  font-weight: 500;
+}
+
+ion-button:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 576px) {
+  .register-container {
+    padding: 16px;
   }
   
   .logo {
-    max-width: 200px;
-    height: auto;
+    width: 140px;
   }
-  
-  .register-form {
-    max-width: 400px;
-    margin: 0 auto;
-  
-    ion-item {
-      --background: #ffffff;
-      --border-radius: 8px;
-      --padding-start: 16px;
-      --padding-end: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  
-      &:last-of-type {
-        margin-bottom: 24px;
-      }
-    }
-  
-    ion-label {
-      --color: var(--ion-color-medium);
-    }
-  
-    ion-input, ion-select {
-      --padding-start: 8px;
-      font-size: 16px;
-    }
-  
-    ion-button {
-      margin-top: 24px;
-      height: 48px;
-      font-size: 18px;
-      text-transform: none;
-      --border-radius: 8px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .register-form {
-      padding: 0 16px;
-    }
-  }
+}

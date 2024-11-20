@@ -1,2 +1,42 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+:root {
+    /** DUOC Colors **/
+    --ion-color-duoc-yellow: #FFC700;
+    --ion-color-duoc-blue: #002E66;
+    --ion-color-duoc-gray: #E6E7E8;
+    --ion-color-duoc-black: #000000;
+  
+    /** Custom color for DUOC **/
+    --ion-color-primary: var(--ion-color-duoc-blue);
+    --ion-color-primary-rgb: 0, 46, 102;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #002859;
+    --ion-color-primary-tint: #1a4375;
+  
+    /** Secondary color (DUOC Yellow) **/
+    --ion-color-secondary: var(--ion-color-duoc-yellow);
+    --ion-color-secondary-rgb: 255, 199, 0;
+    --ion-color-secondary-contrast: #000000;
+    --ion-color-secondary-contrast-rgb: 0, 0, 0;
+    --ion-color-secondary-shade: #e0af00;
+    --ion-color-secondary-tint: #ffcd1a;
+  }
+  
+  /* Crear clases CSS para los colores personalizados */
+  .ion-color-duoc-blue {
+    --ion-color-base: var(--ion-color-duoc-blue);
+    --ion-color-base-rgb: 0, 46, 102;
+    --ion-color-contrast: var(--ion-color-primary-contrast);
+    --ion-color-contrast-rgb: 255, 255, 255;
+    --ion-color-shade: var(--ion-color-primary-shade);
+    --ion-color-tint: var(--ion-color-primary-tint);
+  }
+  
+  .ion-color-duoc-yellow {
+    --ion-color-base: var(--ion-color-duoc-yellow);
+    --ion-color-base-rgb: 255, 199, 0;
+    --ion-color-contrast: var(--ion-color-secondary-contrast);
+    --ion-color-contrast-rgb: 0, 0, 0;
+    --ion-color-shade: var(--ion-color-secondary-shade);
+    --ion-color-tint: var(--ion-color-secondary-tint);
+  }

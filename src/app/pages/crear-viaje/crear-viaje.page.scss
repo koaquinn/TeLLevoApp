@@ -1,63 +1,113 @@
-ion-content {
-    --background: rgba(0, 0, 0, 0.15); // Versión más limpia del fondo translúcido
-    --ion-text-color: #000000; // Color de texto base
-    
-    form {
-      background: white;
-      border-radius: 10px;
-      padding: 16px;
-      margin: 16px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      position: relative; // Para asegurar el correcto posicionamiento
-      z-index: 1; // Asegura que el formulario esté por encima del fondo
-      
-      ion-item {
-        --padding-start: 0;
-        --border-color: #dddddd;
-        --color: #222222;
-        --background: transparent;
-        margin-bottom: 16px;
-        
-        &::part(native) {
-          background: transparent;
-        }
-        
-        ion-label {
-          --color: #222222;
-          font-weight: 500;
-        }
-        
-        ion-input {
-          --color: #000000;
-          margin-top: 8px;
-          
-          &::part(native) {
-            color: #000000;
-          }
-        }
-        
-        &.item-has-focus {
-          --highlight-background: #000000;
-        }
-      }
-      
-      ion-button {
-        margin-top: 16px;
-        --border-radius: 8px;
-        height: 48px;
-        --background: #000000;
-        --color: #ffffff;
-      }
-    }
-        
-    .nombre-conductor {
-      color: #000000 !important;
-      font-weight: 600;
-      font-size: 1.5rem;
-      margin: 16px;
-      display: block;
-      text-align: left;
-      z-index: 2;
-      position: relative;
-    }
+:host {
+  --duoc-blue: #002E66;
+  --duoc-yellow: #FFC700;
+  --duoc-gray: #E6E7E8;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.form-section {
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h2 {
+  color: var(--duoc-blue);
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--duoc-gray);
+}
+
+ion-item {
+  --padding-start: 0;
+  --border-color: var(--duoc-gray);
+  --highlight-color: var(--duoc-blue);
+  margin-bottom: 16px;
+}
+
+ion-item:last-child {
+  margin-bottom: 0;
+}
+
+ion-label {
+  color: var(--duoc-blue) !important;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+ion-input {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --background: #ffffff;
+  border: 1px solid var(--duoc-gray);
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.conductor-item ion-input {
+  background-color: var(--duoc-gray);
+  border-radius: 4px;
+  --padding-start: 8px;
+  font-weight: 500;
+}
+
+.submit-section {
+  margin-top: 32px;
+}
+
+.submit-button {
+  --border-radius: 8px;
+  font-weight: 500;
+  height: 48px;
+  text-transform: none;
+}
+
+ion-button ion-icon {
+  margin-right: 8px;
+}
+
+ion-button:hover {
+  opacity: 0.9;
+}
+
+/* Focus states */
+ion-input:focus {
+  border-color: var(--duoc-yellow);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .form-container {
+    padding: 8px;
   }
+
+  .form-section {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .form-section h2 {
+    font-size: 1.1rem;
+  }
+
+  ion-item {
+    margin-bottom: 12px;
+  }
+}
+
+/* Validation styles */
+ion-input.ng-invalid.ng-touched {
+  border-color: #eb445a;
+}
+
+ion-input.ng-valid.ng-touched {
+  border-color: #2dd36f;
+}

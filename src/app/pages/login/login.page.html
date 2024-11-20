@@ -6,27 +6,55 @@
 
 <ion-content class="ion-padding">
   <div class="login-container">
-    <ion-img class="logo" src="assets/imagenes/Logo-Duoc-UC.png"></ion-img>
+    <ion-img class="logo" src="assets/imagenes/Logo-Duoc-UC.png" alt="Logo DUOC UC"></ion-img>
 
-    <!-- Correo en lugar de RUT -->
-    <ion-item>
-      <ion-label position="floating">Correo Electrónico</ion-label>
-      <ion-input [(ngModel)]="formLogin.correo" type="email"></ion-input>
-    </ion-item>
+    <form (ngSubmit)="iniciarSesion()" #loginForm="ngForm">
+      <ion-list class="ion-no-padding">
+        <ion-item>
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-input 
+            [(ngModel)]="formLogin.correo" 
+            name="correo"
+            type="email" 
+            required
+            email>
+          </ion-input>
+        </ion-item>
 
-    <!-- Contraseña -->
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input [(ngModel)]="formLogin.password" type="password"></ion-input>
-    </ion-item>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input 
+            [(ngModel)]="formLogin.password" 
+            name="password"
+            type="password" 
+            required
+            minlength="6">
+          </ion-input>
+        </ion-item>
+      </ion-list>
 
-    <ion-button expand="block" (click)="iniciarSesion()">Iniciar sesión</ion-button>
-    <ion-button expand="block" fill="outline" (click)="navegarRegistro()">Crear cuenta</ion-button>
+      <div class="ion-padding">
+        <ion-button 
+          expand="block" 
+          type="submit" 
+          [disabled]="!loginForm.valid || loading">
+          Iniciar sesión
+        </ion-button>
 
-    <div class="forgot-password">
-      <a [routerLink]="['/recuperar-clave']">¿Olvidaste tu contraseña?</a>
-    </div>
+        <ion-button 
+          expand="block" 
+          fill="outline" 
+          (click)="navegarRegistro()"
+          [disabled]="loading">
+          Crear cuenta
+        </ion-button>
+      </div>
+
+      <div class="forgot-password">
+        <a [routerLink]="['/recuperar-clave']">
+          ¿Olvidaste tu contraseña?
+        </a>
+      </div>
+    </form>
   </div>
-
-  <ion-loading [isOpen]="loading" message="Cargando..." duration="1500"></ion-loading>
 </ion-content>

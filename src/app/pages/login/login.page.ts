@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FirebaseService } from '../../services/firebase.service';  // Importamos el servicio de Firebase
-import { AlertController } from '@ionic/angular';  // Para mostrar alertas
+import { FirebaseService } from '../../services/firebase.service';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-login',
@@ -10,32 +11,47 @@ import { AlertController } from '@ionic/angular';  // Para mostrar alertas
 })
 export class LoginPage {
   formLogin = {
-    correo: '',  // Usamos correo para la autenticación
+    correo: '',
     password: ''
   };
   loading = false;
 
+
   constructor(
     private router: Router,
-    private firebaseService: FirebaseService,  // Inyectamos el servicio Firebase
-    private alertController: AlertController  // Para mostrar mensajes de error
+    private firebaseService: FirebaseService,
+    private alertController: AlertController
   ) {}
 
+
   async iniciarSesion() {
-    const { correo, password } = this.formLogin;  // Extraemos los valores del formulario
+    const { correo, password } = this.formLogin;
+
 
     if (!correo || !password) {
       this.mostrarAlerta('Error', 'Por favor ingresa correo y contraseña.');
       return;
     }
 
+
     this.loading = true;
 
+
     try {
-      // Validación del inicio de sesión con Firebase
+      // Validar inicio de sesión con Firebase
       const userCredential = await this.firebaseService.login(correo, password);
-      console.log('Usuario autenticado:', userCredential.user);
-      this.router.navigate(['/home']);  // Navega a la página principal después del login exitoso
+      const user = userCredential.user;
+
+
+      // Verificar si el usuario tiene el correo electrónico verificado
+      if (!user.emailVerified) {
+        this.mostrarAlerta('Error', 'Debes verificar tu correo electrónico antes de iniciar sesión.');
+        return;
+      }
+
+
+      console.log('Usuario autenticado:', user);
+      this.router.navigate(['/home']); // Navegar a la página principal después del login exitoso
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
       this.mostrarAlerta('Error', 'Correo o contraseña incorrectos.');
@@ -43,6 +59,7 @@ export class LoginPage {
       this.loading = false;
     }
   }
+
 
   navegarRegistro() {
     if (!this.loading) {
@@ -54,7 +71,7 @@ export class LoginPage {
     }
   }
 
-  // Método para mostrar alertas
+
   async mostrarAlerta(titulo: string, mensaje: string) {
     const alert = await this.alertController.create({
       header: titulo,
@@ -62,6 +79,10 @@ export class LoginPage {
       buttons: ['OK']
     });
 
+
     await alert.present();
   }
 }
+
+
+
