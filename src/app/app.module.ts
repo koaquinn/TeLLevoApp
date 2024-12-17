@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
-import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { ReactiveFormsModule } from '@angular/forms';  // Importación de formularios reactivos
+import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
+import { provideHttpClient  } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+// Configuración de Firebase
 export const firebaseConfig = {
   apiKey: "AIzaSyCpGAtrRltjYrw-62LpR9KNphLMtcg0Z4M",
   authDomain: "tellevoapp-10.firebaseapp.com",
@@ -25,13 +27,17 @@ export const firebaseConfig = {
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(), 
+    IonicModule.forRoot(),
     AppRoutingModule,
-    ReactiveFormsModule,  // Añadir ReactiveFormsModule aquí
-    AngularFireModule.initializeApp(firebaseConfig),  // Configuración de Firebase
-    AngularFirestoreModule  // Habilitar Firestore
+    ReactiveFormsModule, // Módulo de formularios reactivos
+    AngularFireModule.initializeApp(firebaseConfig), // Inicialización de Firebase
+    AngularFirestoreModule, // Habilitar Firestore
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    SQLite, // Proveedor de SQLite
+    provideHttpClient()
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

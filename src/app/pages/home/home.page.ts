@@ -3,6 +3,7 @@ import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { WeatherService } from 'src/app/services/weather.service';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +13,14 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class HomePage implements OnInit {
   nombreUsuario: string = '';
   apellidoUsuario: string = '';
+  weatherData: any;
 
   constructor(
     private firebaseService: FirebaseService,
     private router: Router,
     private auth: AngularFireAuth,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private weatherService: WeatherService
   ) {
     // Verificar el estado de autenticación inmediatamente en el constructor
     this.auth.user.subscribe(user => {
@@ -48,7 +51,20 @@ export class HomePage implements OnInit {
       }
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.weatherService.getWeatherForNacimiento().subscribe(
+      (data) => {
+        this.weatherData = data;
+        if (this.weatherData && this.weatherData.main && this.weatherData.main.temp) {
+          this.weatherData.main.temp = Math.round(this.weatherData.main.temp);  // Redondear la temperatura
+        }
+        console.log('Clima en Nacimiento:', this.weatherData);
+      },
+      (error) => {
+        console.error('Error al obtener el clima:', error);
+      }
+    );
+  }
 
   async logout() {
     try {

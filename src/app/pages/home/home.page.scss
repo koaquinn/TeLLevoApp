@@ -110,6 +110,7 @@ ion-button:hover {
   opacity: 0.9;
 }
 
+/* Media Queries */
 @media (max-width: 768px) {
   .welcome-section h1 {
     font-size: 1.3rem;
@@ -130,4 +131,59 @@ ion-button:hover {
   .action-card:hover {
     transform: none;
   }
+}
+
+/* Weather Section */
+.weather-section {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.weather-section h2 {
+  color: var(--duoc-blue);
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.weather-icon {
+  font-size: 50px;
+  color: var(--duoc-yellow);
+}
+
+.weather-details {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.weather-details p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.weather-details strong {
+  color: var(--duoc-blue);
+}
+
+.weather-details p {
+  color: #333;
+}
+
+.weather-info p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
 }

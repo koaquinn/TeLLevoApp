@@ -2,9 +2,9 @@
   <ion-toolbar style="--background: #002E66;">
     <ion-title style="color: white;">Inicio</ion-title>
     <ion-buttons slot="start" class="logout">
-      <ion-button (click)="logout()" style="color: white;">
+      <ion-buttons (click)="logout()" style="color: white;">
         <ion-icon name="log-out-outline"></ion-icon>
-      </ion-button>
+      </ion-buttons>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -15,6 +15,7 @@
     <p class="subtitle">Organiza tus viajes compartidos de forma fácil y segura</p>
   </div>
 
+  <!-- Nuestro objetivo -->
   <div class="info-section">
     <h2>Nuestro objetivo</h2>
     <p>
@@ -23,6 +24,22 @@
     </p>
   </div>
 
+    <!-- Información del clima -->
+    <div class="weather-section">
+      <h2>Clima en Nacimiento</h2>
+      <div class="weather-info">
+        <div class="weather-icon">
+          <ion-icon name="sunny" style="font-size: 48px; color: #FFB300;"></ion-icon> <!-- Cambia este ícono según el clima -->
+        </div>
+        <div class="weather-details">
+          <p><strong>Temperatura:</strong> {{weatherData?.main?.temp}} °C</p>
+          <p><strong>Descripción:</strong> {{weatherData?.weather[0]?.description | uppercase}}</p>
+          <p><strong>Humedad:</strong> {{weatherData?.main?.humidity}}%</p>
+          <p><strong>Viento:</strong> {{weatherData?.wind?.speed}} m/s</p>
+        </div>
+      </div>
+    </div>
+  
   <ion-grid class="ion-no-padding">
     <ion-row>
       <ion-col size="12" size-md="6" class="ion-padding">
